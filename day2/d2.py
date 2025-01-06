@@ -1,6 +1,3 @@
-from dill import extend
-
-
 def parse_input(filename: str) -> list:
     array = []
     with open(filename) as f:
@@ -11,11 +8,13 @@ def parse_input(filename: str) -> list:
             array.append(inner_array)
     return array
 
+
 def _is_sequence_valid(line):
-    for i in range(len(line)-1):
-        if not line[i+1]-3 <= line[i] <= line[i+1]+3:
+    for i in range(len(line) - 1):
+        if not line[i + 1] - 3 <= line[i] <= line[i + 1] + 3:
             return False
     return True
+
 
 def extend_input(array):
     extended_array = []
@@ -29,6 +28,7 @@ def extend_input(array):
         extended_array.append(inner_array)
 
     return extended_array
+
 
 array = parse_input("input.txt")
 count = 0

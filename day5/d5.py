@@ -28,16 +28,26 @@ def read_pattern(file_name):
     return pattern
 
 
+def search_values(df, value):
+    df = df[df["key"] == value]
+    return df["value"].values
+
+
 # comb_dict = read_combinations(file_name="pattern.txt")
 # pattern = read_pattern(file_name="combinations_list.txt")
-comb_dict = read_combinations(file_name="test_combinations_list.txt")
-patterns = read_pattern(file_name="test_pattern.txt")
+df = read_combinations(file_name="combinations_list.txt")
+patterns = read_pattern(file_name="pattern.txt")
 
+count_total = 0
+count_wrong = 0
+for pattern in patterns:
+    middle_index = len(pattern) // 2
+    count_total += pattern[middle_index]
+    for i, p in enumerate(pattern):
+        values = search_values(df, p)
+        vals_to_check = pattern[i + 1 :]
+        if not set(vals_to_check).issubset(values):
+            count_wrong += pattern[middle_index]
+            break
 
-def search_key(df, key):
-    return 1
-
-
-count = 0
-# for pattern in patterns:
-#     for key in pattern:
+print(f"Task 1: {count_total-count_wrong}")
